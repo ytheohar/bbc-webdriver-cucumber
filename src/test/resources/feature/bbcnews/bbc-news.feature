@@ -1,21 +1,21 @@
-Feature: Find video and share
+Feature: Navigate to video page and share it on facebook
 	The user should be able to navigate through news categories, select a video page and share it on facebook
 
-	Scenario: Navigate to 'News' page by clicking on 'Latest News'
+	Scenario: Navigate to 'News' page by clicking on 'Latest news'
 	    Given the user is landed at the home page
-	    When the user clicks on 'Latest News'
+	    When the user clicks on 'Latest news'
 	    Then the 'News' page loads
 
-	Scenario: Navigate to 'News' page by clicking on 'Latest News'
+	Scenario: Navigate to 'News' page by clicking on 'News' on the navigation bar
 	    Given the user is landed at the home page
 	    When the user clicks 'News' on the navigation bar
 	    Then the 'News' page loads
       	
-	Scenario Outline: Share the Video Page on Facebook
+	Scenario Outline: Navigate to a Video Page and share it on Facebook
 	    Given the user is landed at the home page
 	    When the user clicks 'News' on the navigation bar
 	    And the user clicks '<category>' on the inner news navigation bar
-		And the user clicks on the last video on the right hand Watch/Listen section
+		And the user clicks on the last video on the right hand 'Watch/Listen' section
 		And the user clicks on the facebook share icon
 		Then the facebook page loads having a url that includes the video page url
     	Examples:

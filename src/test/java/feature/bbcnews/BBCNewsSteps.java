@@ -9,8 +9,8 @@ import org.ytheohar.bbc.webdriver.cucumber.HomePage;
 import org.ytheohar.bbc.webdriver.cucumber.NavigationBarPage;
 import org.ytheohar.bbc.webdriver.cucumber.NewsCategoryPage;
 import org.ytheohar.bbc.webdriver.cucumber.NewsPage;
-import org.ytheohar.bbc.webdriver.cucumber.VideoPage;
 import org.ytheohar.bbc.webdriver.cucumber.NewsPage.Category;
+import org.ytheohar.bbc.webdriver.cucumber.VideoPage;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -51,23 +51,26 @@ public class BBCNewsSteps implements En {
 		When("^the user clicks '(.*)' on the inner news navigation bar$",
 				(String categoryLinkTitle) -> {
 					Category category = Category.of(categoryLinkTitle);
-					newsCategoryPage = new NewsCategoryPage(driver, newsPage, category);
+					newsCategoryPage = new NewsCategoryPage(driver, newsPage,
+							category);
 					newsCategoryPage.get();
 				});
 
-		When("^the user clicks on the last video on the right hand Watch/Listen section$", () -> {
-			videoPage = newsCategoryPage.clickFirstVideo();
-		});
+		When("^the user clicks on the last video on the right hand 'Watch/Listen' section$",
+				() -> {
+					videoPage = newsCategoryPage.clickFirstVideo();
+				});
 
 		When("^the user clicks on the facebook share icon$", () -> {
 			fbPage = videoPage.shareOnFacebook();
 		});
 
-		Then("^the facebook page loads having a url that includes the video page url$", () -> {
-			fbPage.shouldBeLoaded();
-		});
+		Then("^the facebook page loads having a url that includes the video page url$",
+				() -> {
+					fbPage.shouldBeLoaded();
+				});
 
-		When("^the user clicks on 'Latest News'$", () -> {
+		When("^the user clicks on 'Latest news'$", () -> {
 			newsPage = new NewsPage(driver, homePage);
 			newsPage.get();
 		});
