@@ -56,7 +56,7 @@ public class BBCNewsSteps implements En {
 					newsCategoryPage.get();
 				});
 
-		When("^the user clicks on the last video on the right hand 'Watch/Listen' section$",
+		When("^the user clicks on the first video on the right hand 'Watch/Listen' section$",
 				() -> {
 					videoPage = newsCategoryPage.clickFirstVideo();
 				});
