@@ -17,9 +17,6 @@ public class HomePage extends LoadableComponent<HomePage> {
 	@FindBy(linkText = "Latest news")
 	private WebElement latestNews;
 
-	@FindBy(linkText = "Latest sports")
-	private WebElement latestSports;
-
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
