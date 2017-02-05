@@ -9,7 +9,9 @@ import java.net.URLEncoder;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class FBPage extends LoadableComponent<FBPage> {
 
@@ -51,13 +53,14 @@ public class FBPage extends LoadableComponent<FBPage> {
 			}
 			assertThat(message, isValid, is(true));
 		} else {
-			assertThat(message, driver.getCurrentUrl(), containsString(encodedLink));
+			assertThat(message, driver.getCurrentUrl(), containsString(encodedLink.replaceAll("www.bbc.com", "www.bbc.co.uk")));
 		}
 	}
 
 	@Override
 	protected void load() {
 		driver.get(baseUrl);
+		new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(baseUrl));
 	}
 
 	/**

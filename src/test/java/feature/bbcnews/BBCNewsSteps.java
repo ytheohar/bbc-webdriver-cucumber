@@ -27,6 +27,7 @@ public class BBCNewsSteps implements En {
 
 	@Before
 	public void setup() {
+		System.setProperty("webdriver.gecko.driver","C:/Selenium/geckodriver.exe");
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
@@ -70,7 +71,7 @@ public class BBCNewsSteps implements En {
 					fbPage.shouldBeLoaded();
 				});
 
-		When("^the user clicks on 'Latest news'$", () -> {
+		When("^the user clicks on 'News headlines'$", () -> {
 			newsPage = new NewsPage(driver, homePage);
 			newsPage.get();
 		});

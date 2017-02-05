@@ -7,14 +7,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends LoadableComponent<HomePage> {
 
 	private final WebDriver driver;
 	private final static String baseUrl = "http://www.bbc.co.uk/";
 
-	@FindBy(linkText = "Latest news")
+	@FindBy(linkText = "News headlines")
 	private WebElement latestNews;
 
 	public HomePage(WebDriver driver) {
@@ -40,6 +42,7 @@ public class HomePage extends LoadableComponent<HomePage> {
 	 */
 	public NewsPage clickLatestNews() {
 		latestNews.click();
+		new WebDriverWait(driver, 10).until(ExpectedConditions.urlToBe(NewsPage.BASE_URL));
 		return new NewsPage(driver, this);
 	}
 }

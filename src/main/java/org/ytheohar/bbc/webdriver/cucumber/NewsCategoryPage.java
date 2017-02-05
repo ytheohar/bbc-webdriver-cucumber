@@ -7,7 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.ytheohar.bbc.webdriver.cucumber.NewsPage.Category;
 
 public class NewsCategoryPage extends LoadableComponent<NewsCategoryPage> {
@@ -28,15 +30,12 @@ public class NewsCategoryPage extends LoadableComponent<NewsCategoryPage> {
 		this.parent = parent;
 		this.cat = cat;
 		baseUrl = "http://www.bbc.co.uk/news" + cat.getPath();
-		PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver, this);
 	}
 
 	@Override
 	protected void isLoaded() throws Error {
-		String url = driver.getCurrentUrl();
 		String message = "News content page has not been loaded correctly";
-		assertThat(message, url, equalTo(baseUrl));
-
 		String actualTitle = titleElem.getText();
 		assertThat(message, actualTitle, equalTo(cat.getTitle()));
 	}
@@ -44,7 +43,8 @@ public class NewsCategoryPage extends LoadableComponent<NewsCategoryPage> {
 	@Override
 	protected void load() {
 		parent.get().selectCategory(cat);
-	}
+        new WebDriverWait(driver, 10).until(ExpectedConditions.urlContains(cat.getPath()));
+    }
 
 	/**
 	 * Clicks on the first video page link on the right hand 'Watch/Listen'
@@ -55,7 +55,7 @@ public class NewsCategoryPage extends LoadableComponent<NewsCategoryPage> {
 	public VideoPage clickFirstVideo() {
 		String path = video.getAttribute("href");
 		video.click();
-		return new VideoPage(driver, path);
+        return new VideoPage(driver, path);
 	}
 
 	/**
